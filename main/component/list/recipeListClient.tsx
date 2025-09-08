@@ -44,7 +44,12 @@ export function RecipeListClient({
       )}
       <div className="grid grid-cols-1 gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {data?.recipes.map((r: RecipeType) => (
-          <RecipeCard key={r.RCP_SEQ} {...r} />
+          <RecipeCard
+            key={r.RCP_SEQ}
+            RCP_NM={r.RCP_NM}
+            ATT_FILE_NO_MAIN={r.ATT_FILE_NO_MAIN}
+            RCP_PAT2={r.RCP_PAT2}
+          />
         ))}
       </div>
       <div className="flex justify-center w-full mt-9 text-body2">

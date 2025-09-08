@@ -1,3 +1,4 @@
+import { Link2 } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
@@ -11,27 +12,33 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 ">
           <h3 className="font-medium text-body2 text-label-700">@Contact</h3>
-          <div className="flex  gap-2 font-medium text-body3 text-label-700">
+          <div className="flex  gap-2 font-medium text-body3 text-label-700 max-md:flex-col">
             <div className="flex flex-col gap-2">
               <h3 className="font-medium text-label-500">E-mail</h3>
-              <div className="font-normal">
+              <div className="font-normal text-label-900">
                 <p>tjsdbgus1117@naver.com</p>
               </div>
             </div>
             <div className="flex flex-col gap-2">
               <h3 className="font-medium text-label-500">github</h3>
-              <div className="font-normal">
-                <Link href="https://github.com/seodonghyunzz">
-                  seodonghyunzz
-                </Link>
+              <div className="font-normal text-label-900">
+                <div className="flex gap-2">
+                  <Link2 stroke="#2fadff" />
+                  <Link href="https://github.com/seodonghyunzz">
+                    seodonghyunzz
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="flex flex-col gap-2">
               <h3 className="font-medium text-label-500">blog</h3>
-              <div className="font-normal">
-                <Link href="https://velog.io/@chunmyo">velog/@chunmyo</Link>
+              <div className="font-normal text-label-900">
+                <div className="flex gap-2">
+                  <Link2 stroke="#2fadff" />
+                  <Link href="https://velog.io/@chunmyo">velog/@chunmyo</Link>
+                </div>
               </div>
             </div>
           </div>

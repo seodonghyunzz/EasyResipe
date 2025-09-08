@@ -21,6 +21,7 @@ export async function getRecipeList({
   const url = `${process.env.NEXT_PUBLIC_API_URL}/${
     process.env.NEXT_PUBLIC_API_KEY
   }/COOKRCP01/json/${startIdx}/${endIdx}/${params.toString()}`;
+  console.log(url);
   try {
     const res = await fetch(url, {
       next: { revalidate: 86400 },
@@ -41,6 +42,11 @@ export async function getRecipeList({
 }
 function getRange(page: number, perPage = 12) {
   const startIdx = (page - 1) * perPage + 1;
-  const endIdx = page * perPage;
+  let endIdx = page * perPage;
+  //48번째 인덱스 오류
+  if (page === 4 && endIdx === 48) {
+    endIdx = 47;
+  }
+
   return { startIdx, endIdx };
 }
