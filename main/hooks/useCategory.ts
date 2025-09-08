@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+
 export function UseCategory() {
   const router = useRouter();
   const categoryArr = ["밥", "국", "반찬", "후식"];
@@ -13,7 +14,7 @@ export function UseCategory() {
   }, [searchParams]);
 
   const goToCategory = (category: string) => {
-    router.push(`/?category=${category}`, { scroll: false });
+    router.push(`/?category=${category}&page=1`, { scroll: false });
   };
   const goToHome = () => {
     router.push("/", { scroll: false });

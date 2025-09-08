@@ -24,6 +24,7 @@ export function SearchBar({ setName, SearchRecipe }: searchBarType) {
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               SearchRecipe();
+              setName("");
             }
           }}
         />

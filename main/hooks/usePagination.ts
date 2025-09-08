@@ -1,18 +1,25 @@
+"use cllient";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 
 export function UsePagination(total_count: number) {
   const router = useRouter();
   const [startPage, setStartPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+
   const pagesPerGroup = 5;
   const recipePerPage = 12;
   const totalPages = Math.ceil(total_count / recipePerPage);
-  const pageArr = Array.from(
-    { length: Math.min(pagesPerGroup, totalPages - startPage + 1) },
-    (_, i) => startPage + i
-  );
+  const pageArr = useMemo(() => {
+    const newStart =
+      Math.floor((currentPage - 1) / pagesPerGroup) * pagesPerGroup + 1;
+    setStartPage(newStart);
+    return Array.from(
+      { length: Math.min(pagesPerGroup, totalPages - newStart + 1) },
+      (_, i) => newStart + i
+    );
+  }, [currentPage, totalPages, pagesPerGroup]);
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
 
@@ -21,7 +28,7 @@ export function UsePagination(total_count: number) {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
-  }, [searchParams, totalPages]);
+  }, [searchParams, totalPages, setCurrentPage]);
 
   const getNextPageGroup = () => {
     const nextStart = startPage + pagesPerGroup;
@@ -48,7 +55,7 @@ export function UsePagination(total_count: number) {
       if (currentPage >= startPage + 4) {
         setStartPage(startPage + pagesPerGroup);
       }
-      setCurrentPage((prev) => prev + 1);
+      setCurrentPage(currentPage + 1);
 
       params.set("page", String(currentPage + 1));
       router.push(`/?${params.toString()}`);
@@ -60,7 +67,7 @@ export function UsePagination(total_count: number) {
       if (currentPage === startPage) {
         setStartPage(currentPage - pagesPerGroup);
       }
-      setCurrentPage((prev) => prev - 1);
+      setCurrentPage(currentPage - 1);
 
       params.set("page", String(currentPage - 1));
       router.push(`/?${params.toString()}`);

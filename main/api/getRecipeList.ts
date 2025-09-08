@@ -21,7 +21,6 @@ export async function getRecipeList({
   const url = `${process.env.NEXT_PUBLIC_API_URL}/${
     process.env.NEXT_PUBLIC_API_KEY
   }/COOKRCP01/json/${startIdx}/${endIdx}/${params.toString()}`;
-  console.log(url);
   try {
     const res = await fetch(url, {
       next: { revalidate: 86400 },
