@@ -1,6 +1,5 @@
 export async function getRecipeDetailList({ name }: { name: string }) {
-  const keyid = process.env.NEXT_PUBLIC_API_KEY as string;
-  const url = `http://openapi.foodsafetykorea.go.kr/api/${keyid}/COOKRCP01/json/1/1/RCP_NM=${name}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_API_KEY}/COOKRCP01/json/1/1/RCP_NM=${name}`;
 
   try {
     const res = await fetch(url, {

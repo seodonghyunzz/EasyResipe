@@ -19,7 +19,9 @@ export async function getRecipeList({
     //카테고리
     params.append("RCP_PAT2", category);
   }
-  const url = `http://openapi.foodsafetykorea.go.kr/api/${keyid}/COOKRCP01/json/${startIdx}/${endIdx}/${params.toString()}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/${
+    process.env.NEXT_PUBLIC_API_KEY
+  }/COOKRCP01/json/${startIdx}/${endIdx}/${params.toString()}`;
   try {
     const res = await fetch(url, {
       next: { revalidate: 86400 },
