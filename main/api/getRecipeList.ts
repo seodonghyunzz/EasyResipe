@@ -1,0 +1,39 @@
+export async function getRecipeList({
+  name,
+  category,
+  page,
+}: {
+  name: string;
+  category: string;
+  page: number;
+}) {
+  const keyid = process.env.NEXT_PUBLIC_API_KEY as string;
+  const { startIdx, endIdx } = getRange(page);
+  const params = new URLSearchParams();
+
+  if (name) {
+    //이름 검색
+    params.append("RCP_NM", name);
+  }
+  if (category) {
+    //카테고리
+    params.append("RCP_PAT2", category);
+  }
+  const url = `http://openapi.foodsafetykorea.go.kr/api/${keyid}/COOKRCP01/json/${startIdx}/${endIdx}/${params.toString()}`;
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    return null;
+  }
+  const data = await res.json();
+  const total_count = data.COOKRCP01.total_count;
+  const recipes = data.COOKRCP01.row;
+
+  return { total_count, recipes };
+}
+function getRange(page: number, perPage = 12) {
+  const startIdx = (page - 1) * perPage + 1;
+  const endIdx = page * perPage;
+  return { startIdx, endIdx };
+}

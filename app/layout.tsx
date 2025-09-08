@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import Header from "../shared/layout/header";
+import Footer from "../shared/layout/footer";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Providers from "@/app/provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,11 +15,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="ko">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/variable/pretendardvariable.css"
+        />
+      </head>
+      <body className={"h-full min-h-screen font-pretendard"}>
+        <div className="mx-auto md:container md:min-h-[calc(100dvh-388px-60px)]">
+          <Header />
+          <Providers>{children}</Providers>
+          <Footer />
+        </div>
       </body>
     </html>
   );
