@@ -23,7 +23,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2">
               <h3 className="font-medium text-label-500">github</h3>
               <div className="font-normal">
-                <Link href="/https://github.com/seodonghyunzz">
+                <Link href="https://github.com/seodonghyunzz">
                   seodonghyunzz
                 </Link>
               </div>
@@ -31,7 +31,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2">
               <h3 className="font-medium text-label-500">blog</h3>
               <div className="font-normal">
-                <Link href="/https://velog.io/@chunmyo">velog/@chunmyo</Link>
+                <Link href="https://velog.io/@chunmyo">velog/@chunmyo</Link>
               </div>
             </div>
           </div>
