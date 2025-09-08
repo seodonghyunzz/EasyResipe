@@ -7,7 +7,6 @@ export async function getRecipeList({
   category: string;
   page: number;
 }) {
-  const keyid = process.env.NEXT_PUBLIC_API_KEY as string;
   const { startIdx, endIdx } = getRange(page);
   const params = new URLSearchParams();
 
