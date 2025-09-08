@@ -20,17 +20,23 @@ export async function getRecipeList({
     params.append("RCP_PAT2", category);
   }
   const url = `http://openapi.foodsafetykorea.go.kr/api/${keyid}/COOKRCP01/json/${startIdx}/${endIdx}/${params.toString()}`;
+  try {
+    const res = await fetch(url, {
+      next: { revalidate: 86400 },
+    });
 
-  const res = await fetch(url);
+    if (!res.ok) {
+      return null;
+    }
+    const data = await res.json();
+    const total_count = data.COOKRCP01.total_count;
+    const recipes = data.COOKRCP01.row;
 
-  if (!res.ok) {
+    return { total_count, recipes };
+  } catch (err) {
+    console.log("api 요청 실패: ", err);
     return null;
   }
-  const data = await res.json();
-  const total_count = data.COOKRCP01.total_count;
-  const recipes = data.COOKRCP01.row;
-
-  return { total_count, recipes };
 }
 function getRange(page: number, perPage = 12) {
   const startIdx = (page - 1) * perPage + 1;
