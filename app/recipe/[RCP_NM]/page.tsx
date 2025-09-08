@@ -27,3 +27,28 @@ export default async function RecipeDetailPage({
     </HydrationBoundary>
   );
 }
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ RCP_NM: string }>;
+}) {
+  const { RCP_NM } = await params;
+  const name = decodeURIComponent(RCP_NM).replace(/\s+/g, "");
+  const data = await getRecipeDetailList({ name });
+
+  return {
+    title: data.RCP_NM,
+    description: data.MANUAL01,
+    openGraph: {
+      title: data.RCP_NM,
+      description: data.MANUAL01,
+      images: [data.ATT_FILE_NO_MAIN],
+    },
+    twitter: {
+      title: data.RCP_NM,
+      description: data.MANUAL01,
+      images: [data.ATT_FILE_NO_MAIN],
+      card: [data.ATT_FILE_NO_MK],
+    },
+  };
+}

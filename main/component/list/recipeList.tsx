@@ -10,7 +10,7 @@ export default async function RecipeList({
 }: {
   name: string;
   category: string;
-  page: string;
+  page: number;
 }) {
   const queryClient = new QueryClient();
 
