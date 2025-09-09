@@ -37,7 +37,7 @@ export function UsePagination(total_count: number) {
       setCurrentPage(nextStart);
     }
     params.set("page", String(nextStart));
-    router.push(`/?${params.toString()}`, { scroll: false });
+    router.push(`/?${params.toString()}`);
   };
 
   const getPrevPageGroup = () => {
@@ -47,7 +47,7 @@ export function UsePagination(total_count: number) {
       setCurrentPage(prevStart);
     }
     params.set("page", String(prevStart));
-    router.push(`/?${params.toString()}`, { scroll: false });
+    router.push(`/?${params.toString()}`);
   };
 
   const getNextPage = () => {
@@ -58,7 +58,7 @@ export function UsePagination(total_count: number) {
       setCurrentPage(currentPage + 1);
 
       params.set("page", String(currentPage + 1));
-      router.push(`/?${params.toString()}`, { scroll: false });
+      router.push(`/?${params.toString()}`);
     }
   };
 
@@ -70,13 +70,13 @@ export function UsePagination(total_count: number) {
       setCurrentPage(currentPage - 1);
 
       params.set("page", String(currentPage - 1));
-      router.push(`/?${params.toString()}`, { scroll: false });
+      router.push(`/?${params.toString()}`);
     }
   };
   const getButtonPage = (page: number) => {
     setCurrentPage(page);
     params.set("page", String(page));
-    router.push(`?${params.toString()}`, { scroll: false });
+    router.push(`?${params.toString()}`);
   };
   return {
     getButtonPage,
