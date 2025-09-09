@@ -4,8 +4,8 @@ import { RecipeCard } from "./recipeCard";
 import { useQuery } from "@tanstack/react-query";
 import { getRecipeList } from "@/main/api/getRecipeList";
 import Pagination from "./pagination";
-import NoResult from "@/shared/component/noResult";
 import { Loading } from "@/shared/component/loading";
+import NoResult from "@/shared/component/noResult";
 
 type RecipeListResponse = {
   total_count: number;
@@ -32,13 +32,11 @@ export function RecipeListClient({
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
-
   if (!data?.recipes || data.recipes.length === 0) return <NoResult />;
-
   return (
     <div>
       {isLoading && (
-        <div className="h-[300px]">
+        <div className="h-[300px] flex justify-center">
           <Loading />
         </div>
       )}

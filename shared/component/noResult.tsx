@@ -47,6 +47,15 @@ export default function NoResult() {
         >
           <span>반찬</span>
         </button>
+        <span>,</span>
+        <button
+          className="cursor-pointer"
+          onClick={() => {
+            router.push("/");
+          }}
+        >
+          <span>홈</span>
+        </button>
       </div>
     </div>
   );

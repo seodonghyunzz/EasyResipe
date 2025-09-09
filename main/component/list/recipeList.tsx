@@ -14,11 +14,12 @@ export default async function RecipeList({
 }) {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
+  await queryClient.fetchQuery({
     queryKey: ["recipes", name, category, page],
     queryFn: () => getRecipeList({ name, category, page }),
     staleTime: 1000 * 60,
   });
+
   const dehydrateState = dehydrate(queryClient);
 
   return (

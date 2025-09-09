@@ -15,7 +15,7 @@ export default async function RecipeDetailPage({
   const name = decodeURIComponent(RCP_NM).replace(/\s+/g, "");
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
+  await queryClient.fetchQuery({
     queryKey: ["recipes", name],
     queryFn: () => getRecipeDetailList({ name }),
     staleTime: 1000 * 60,

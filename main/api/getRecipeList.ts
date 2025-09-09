@@ -21,6 +21,7 @@ export async function getRecipeList({
   const url = `${process.env.NEXT_PUBLIC_API_URL}/${
     process.env.NEXT_PUBLIC_API_KEY
   }/COOKRCP01/json/${startIdx}/${endIdx}/${params.toString()}`;
+
   try {
     const res = await fetch(url, {
       next: { revalidate: 86400 },
@@ -29,6 +30,7 @@ export async function getRecipeList({
     if (!res.ok) {
       return null;
     }
+
     const data = await res.json();
     const total_count = data.COOKRCP01.total_count;
     const recipes = data.COOKRCP01.row;
