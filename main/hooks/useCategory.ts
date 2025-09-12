@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 export function UseCategory() {
   const router = useRouter();
-  const categoryArr = ["밥", "국", "반찬", "후식"];
+  const categoryArr = ["밥", "국", "반찬", "후식", "일품"];
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const searchParams = useSearchParams();
   useEffect(() => {
