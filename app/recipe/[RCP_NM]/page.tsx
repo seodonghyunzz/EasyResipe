@@ -37,16 +37,16 @@ export async function generateMetadata({
   const data = await getRecipeDetailList({ name });
 
   return {
-    title: data.RCP_NM,
-    description: data.MANUAL01,
+    title: `${data.RCP_NM} 레시피`,
+    description: `${data.RCP_PAT2}카테고리의 ${data.RCP_NM}레시피`,
     openGraph: {
       title: data.RCP_NM,
-      description: data.MANUAL01,
+      description: `${data.RCP_PAT2}카테고리의 ${data.RCP_NM}레시피`,
       images: [data.ATT_FILE_NO_MAIN],
     },
     twitter: {
       title: data.RCP_NM,
-      description: data.MANUAL01,
+      description: `${data.RCP_PAT2}카테고리의 ${data.RCP_NM}레시피`,
       images: [data.ATT_FILE_NO_MAIN],
       card: [data.ATT_FILE_NO_MK],
     },
