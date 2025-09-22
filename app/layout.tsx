@@ -7,6 +7,9 @@ import Providers from "@/app/provider";
 export const metadata: Metadata = {
   title: "밥먹자",
   description: "한식레시피 모음",
+  verification: {
+    google: "mkfhus9xqIppGBJDQCJN64g-Xg8qXcCWzPS2dXd-r6s",
+  },
 };
 
 export default function RootLayout({

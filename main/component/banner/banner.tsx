@@ -14,6 +14,7 @@ export default async function Banner() {
                 alt={bannerimg.alt}
                 className="absolute inset-0 object-cover w-full h-full transition-transform duration-300 ease-in-out hover:scale-105"
                 fill
+                priority
               />
             </div>
           </Link>
