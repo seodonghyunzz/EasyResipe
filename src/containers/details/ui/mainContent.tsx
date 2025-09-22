@@ -1,8 +1,8 @@
 import { RecipeType } from "@/src/libs/types/recipe";
-import { Manual } from "../../../../details/hooks/useManual";
+import { useManual } from "../hooks/useManual";
 import Image from "next/image";
 export function MainContent(props: RecipeType) {
-  const manual = Manual(props);
+  const manual = useManual(props);
 
   return (
     <div className="flex flex-col gap-8">

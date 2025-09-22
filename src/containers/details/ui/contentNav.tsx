@@ -1,9 +1,9 @@
 "use client";
 import { ChevronRight } from "lucide-react";
-import { UseNav } from "../../../../details/hooks/useNav";
+import { useNav } from "../hooks/useNav";
 
 export function ContentNav({ RCP_PAT2 }: { RCP_PAT2: string }) {
-  const { goToHome, goToCategory } = UseNav();
+  const { goToHome, goToCategory } = useNav();
   if (!RCP_PAT2) return;
 
   return (

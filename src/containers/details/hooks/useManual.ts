@@ -1,6 +1,6 @@
 import { RecipeType } from "@/src/libs/types/recipe";
 
-export function Manual(props: RecipeType) {
+export function useManual(props: RecipeType) {
   const manual: { step: number; text?: string; img?: string }[] = [];
 
   for (let i = 1; i <= 20; i++) {

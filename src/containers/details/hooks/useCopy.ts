@@ -4,7 +4,7 @@ import { useCopyToClipboard } from "react-use";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
-export default function UseCopyToClipboard() {
+export function useCopy() {
   const [state, copyToClipboard] = useCopyToClipboard();
   const [showToast, setShowToast] = useState(false);
 

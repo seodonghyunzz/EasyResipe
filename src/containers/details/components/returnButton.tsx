@@ -1,10 +1,10 @@
 "use client";
 
 import { Link2 } from "lucide-react";
-import UseCopyToClipboard from "../hooks/useCopyToClipboard";
+import { useCopy } from "../hooks/useCopy";
 import { ToastBox } from "@/src/shared/components/toastbox";
 export default function ReturnButton() {
-  const { handleCopy, showToast, routeToHome } = UseCopyToClipboard();
+  const { handleCopy, showToast, routeToHome } = useCopy();
 
   return (
     <div className="size-full">
