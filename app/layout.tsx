@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Header from "../shared/layout/header";
-import Footer from "../shared/layout/footer";
+import { Header } from "../src/shared/layout/header";
+import { Footer } from "../src/shared/layout/footer";
 import "./globals.css";
 import Providers from "@/app/provider";
 

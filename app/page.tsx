@@ -1,7 +1,7 @@
-import Category from "@/main/component/category/category";
-import Banner from "../main/component/banner/banner";
-import RecipeList from "../main/component/list/recipeList";
-import SearchList from "../main/component/search/searchList";
+import { Category } from "@/src/containers/main/components/category/category";
+import { Banner } from "../src/containers/main/components/banner/banner";
+import { RecipeList } from "../src/containers/main/components/list/recipeList";
+import { SearchList } from "../src/containers/main/components/search/searchList";
 
 export default async function Home({
   searchParams,

@@ -4,15 +4,15 @@ import {
   dehydrate,
   HydrationBoundary,
 } from "@tanstack/react-query";
-import { getRecipeDetailList } from "../../../details/api/getRecipeDetailList";
+import { getRecipeDetailList } from "../../../src/containers/details/api/getRecipeDetailList";
 
 export default async function RecipeDetailPage({
   params,
 }: {
-  params: Promise<{ RCP_NM: string }>;
+  params: Promise<{ id: string }>;
 }) {
-  const { RCP_NM } = await params;
-  const name = decodeURIComponent(RCP_NM).replace(/\s+/g, "");
+  const { id } = await params;
+  const name = decodeURIComponent(id).replace(/\s+/g, "");
   const queryClient = new QueryClient();
 
   await queryClient.fetchQuery({
@@ -30,23 +30,23 @@ export default async function RecipeDetailPage({
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ RCP_NM: string }>;
+  params: Promise<{ id: string }>;
 }) {
-  const { RCP_NM } = await params;
-  const name = decodeURIComponent(RCP_NM).replace(/\s+/g, "");
+  const { id } = await params;
+  const name = decodeURIComponent(id).replace(/\s+/g, "");
   const data = await getRecipeDetailList({ name });
 
   return {
-    title: `${data.RCP_NM} 레시피`,
-    description: `${data.RCP_PAT2}카테고리의 ${data.RCP_NM}레시피`,
+    title: `${data.id} 레시피`,
+    description: `${data.RCP_PAT2}카테고리의 ${data.id}레시피`,
     openGraph: {
-      title: data.RCP_NM,
-      description: `${data.RCP_PAT2}카테고리의 ${data.RCP_NM}레시피`,
+      title: data.id,
+      description: `${data.RCP_PAT2}카테고리의 ${data.id}레시피`,
       images: [data.ATT_FILE_NO_MAIN],
     },
     twitter: {
-      title: data.RCP_NM,
-      description: `${data.RCP_PAT2}카테고리의 ${data.RCP_NM}레시피`,
+      title: data.id,
+      description: `${data.RCP_PAT2}카테고리의 ${data.id}레시피`,
       images: [data.ATT_FILE_NO_MAIN],
       card: [data.ATT_FILE_NO_MK],
     },

@@ -1,9 +1,9 @@
 "use client";
-import { ReCipeDetailContent } from "../../../details/component/recipeDetailContent";
+import { ReCipeDetailContent } from "../../../src/containers/details/components/recipeDetailContent";
 import { useQuery } from "@tanstack/react-query";
-import { getRecipeDetailList } from "../../../details/api/getRecipeDetailList";
-import { RecipeType } from "@/lib/type/recipe";
-import { Loading } from "@/shared/component/loading";
+import { getRecipeDetailList } from "../../../src/containers/details/api/getRecipeDetailList";
+import { RecipeType } from "@/src/libs/types/recipe";
+import { Loading } from "@/src/shared/components/loading";
 
 export function RecipeDetailClient({ name }: { name: string }) {
   const { data, isLoading } = useQuery<RecipeType>({
