@@ -1,12 +1,17 @@
-"use client";
-import { useSearchParams } from "next/navigation";
-import { RecipeListClient } from "./recipeListClient";
+import { Suspense } from "react";
+import { Loading } from "@/src/shared/components/loading";
+import { RecipeListWithParams } from "./recipeListWithParams";
 
 export function RecipeListWrapper() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get("name") || "";
-  const category = searchParams.get("category") || "";
-  const page = parseInt(searchParams.get("page") || "1", 10);
-
-  return <RecipeListClient name={name} category={category} page={page} />;
+  return (
+    <Suspense
+      fallback={
+        <div className="h-[400px] flex justify-center items-center">
+          <Loading />
+        </div>
+      }
+    >
+      <RecipeListWithParams />
+    </Suspense>
+  );
 }
