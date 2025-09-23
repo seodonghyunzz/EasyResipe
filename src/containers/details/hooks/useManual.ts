@@ -1,3 +1,4 @@
+"use client";
 import { RecipeType } from "@/src/libs/types/recipe";
 
 export function useManual(props: RecipeType) {

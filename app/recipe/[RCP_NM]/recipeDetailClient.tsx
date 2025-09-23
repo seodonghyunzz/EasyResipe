@@ -15,16 +15,15 @@ export function RecipeDetailClient({ name }: { name: string }) {
     refetchOnReconnect: false,
   });
 
+  if (isLoading) {
+    return (
+      <div className="h-[500px] flex justify-center items-center">
+        <Loading />
+      </div>
+    );
+  }
+
   if (!data) return null;
 
-  return (
-    <div>
-      {isLoading && (
-        <div className="h-[500px]">
-          <Loading />
-        </div>
-      )}
-      <ReCipeDetailContent {...data} />;
-    </div>
-  );
+  return <ReCipeDetailContent {...data} />;
 }

@@ -1,3 +1,4 @@
+"use client";
 import ReturnButton from "./returnButton";
 import { RecipeType } from "@/src/libs/types/recipe";
 import { ContentHeader } from "../ui/contentHeader";

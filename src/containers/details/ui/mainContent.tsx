@@ -1,6 +1,8 @@
+"use client";
 import { RecipeType } from "@/src/libs/types/recipe";
 import { useManual } from "../hooks/useManual";
 import Image from "next/image";
+
 export function MainContent(props: RecipeType) {
   const manual = useManual(props);
 
