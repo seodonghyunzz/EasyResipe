@@ -7,9 +7,16 @@ import Providers from "@/app/provider";
 export const metadata: Metadata = {
   title: "밥먹자",
   description: "한식레시피 모음",
-  verification: {
-    google: "mkfhus9xqIppGBJDQCJN64g-Xg8qXcCWzPS2dXd-r6s",
+  metadataBase: new URL("https://easy-resipe.vercel.app"),
+  openGraph: {
+    type: "website",
+    siteName: "밥먹자",
+    locale: "ko_KR",
+    title: "밥먹자",
+    description: "한식레시피 모음",
   },
+  alternates: { canonical: "/" },
+  verification: { google: "mkfhus9xqIppGBJDQCJN64g-Xg8qXcCWzPS2dXd-r6s" },
 };
 
 export default function RootLayout({
