@@ -1,9 +1,11 @@
+import { ONE_DAY_SECONDS } from "@/src/shared/const";
+
 export async function getRecipeDetailList({ name }: { name: string }) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_API_KEY}/COOKRCP01/json/1/1/RCP_NM=${name}`;
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 86400 },
+      next: { revalidate: ONE_DAY_SECONDS },
     });
     if (!res.ok) {
       return null;

@@ -1,3 +1,5 @@
+import { ITEM_PER_PAGE, ONE_DAY_SECONDS } from "@/src/shared/const";
+
 export async function getRecipeList({
   name,
   category,
@@ -23,15 +25,17 @@ export async function getRecipeList({
   }/COOKRCP01/json/${startIdx}/${endIdx}/${params.toString()}`;
 
   try {
+    console.time("fetch");
     const res = await fetch(url, {
-      next: { revalidate: 86400 },
+      next: { revalidate: ONE_DAY_SECONDS },
     });
-
+    console.timeEnd("fetch");
     if (!res.ok) {
       return null;
     }
-
+    console.time("json");
     const data = await res.json();
+    console.timeEnd("json");
     const total_count = data.COOKRCP01.total_count;
     const recipes = data.COOKRCP01.row;
 
@@ -41,7 +45,7 @@ export async function getRecipeList({
     return null;
   }
 }
-function getRange(page: number, perPage = 12) {
+function getRange(page: number, perPage = ITEM_PER_PAGE) {
   const startIdx = (page - 1) * perPage + 1;
   let endIdx = page * perPage;
   //48번째 인덱스 오류

@@ -20,8 +20,10 @@ export function RecipeCard({
             <Image
               src={ATT_FILE_NO_MAIN ?? ""}
               alt={RCP_NM}
-              className="absolute inset-0 size-full"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              className="absolute inset-0 size-full"
+              loading="lazy"
             />
           </div>
           <div>

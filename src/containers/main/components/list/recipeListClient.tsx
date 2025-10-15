@@ -31,6 +31,7 @@ export function RecipeListClient({
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
+    retry: 1,
   });
   if (isLoading && !data) {
     return (

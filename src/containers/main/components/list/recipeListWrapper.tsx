@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Loading } from "@/src/shared/components/loading";
 import { RecipeListWithParams } from "./recipeListWithParams";
 
-export function RecipeListWrapper() {
+export async function RecipeListWrapper() {
   return (
     <Suspense
       fallback={

@@ -1,6 +1,5 @@
 export function ContentHeader({
   RCP_NM,
-  HASH_TAG,
 }: {
   RCP_NM: string;
   HASH_TAG: string;
