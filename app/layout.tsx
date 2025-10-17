@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "한식레시피 모음",
   },
   alternates: { canonical: "/" },
-  verification: { google: "mkfhus9xqIppGBJDQCJN64g-Xg8qXcCWzPS2dXd-r6s" },
+  verification: { google: "goQIMOu7pJHAebaNL2Hnabo1chO2PmfReaapWLp2gck" },
 };
 
 export default function RootLayout({
