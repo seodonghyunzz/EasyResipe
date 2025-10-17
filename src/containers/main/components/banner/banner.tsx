@@ -17,8 +17,6 @@ export async function Banner() {
                 height={400}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="absolute inset-0 object-cover w-full h-full transition-transform duration-300 ease-in-out hover:scale-105"
-                loading={i === 0 ? "eager" : "lazy"}
-                priority={i === 0}
               />
             </div>
           </Link>
