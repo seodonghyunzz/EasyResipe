@@ -57,16 +57,20 @@ export async function generateMetadata({
   return {
     title: `${data.RCP_NM} 레시피`,
     description: `${data.RCP_PAT2}카테고리의 ${data.RCP_NM}레시피`,
+    alternates: {
+      canonical: `/recipe/${encodeURIComponent(data.RCP_NM)}`,
+    },
     openGraph: {
       title: data.RCP_NM,
       description: `${data.RCP_PAT2}카테고리의 ${data.RCP_NM}레시피`,
       images: [data.ATT_FILE_NO_MAIN],
+      type: "article",
     },
     twitter: {
+      card: "summary_large_image",
       title: data.RCP_NM,
       description: `${data.RCP_PAT2}카테고리의 ${data.RCP_NM}레시피`,
       images: [data.ATT_FILE_NO_MAIN],
-      card: [data.ATT_FILE_NO_MK],
     },
   };
 }
