@@ -39,3 +39,17 @@ export function RecipeCard({
     </div>
   );
 }
+
+export function RecipeCardSkeleton() {
+  return (
+    <div className="animate-pulse">
+      <div className="flex flex-col gap-6">
+        <div className="relative aspect-[2/1] overflow-hidden rounded-2xl bg-gray-200" />
+        <div className="space-y-2">
+          <div className="h-4 w-24 bg-gray-200 rounded" />
+          <div className="h-5 w-3/4 bg-gray-200 rounded" />
+        </div>
+      </div>
+    </div>
+  );
+}

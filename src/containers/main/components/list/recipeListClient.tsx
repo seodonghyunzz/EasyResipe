@@ -1,10 +1,9 @@
 "use client";
 import { RecipeType } from "@/src/libs/types/recipe";
-import { RecipeCard } from "./recipeCard";
+import { RecipeCard, RecipeCardSkeleton } from "./recipeCard";
 import { useQuery } from "@tanstack/react-query";
 import { getRecipeList } from "@/src/containers/main/api/getRecipeList";
 import { Pagination } from "./pagination";
-import { Loading } from "@/src/shared/components/loading";
 import { NoResult } from "@/src/shared/components/noResult";
 
 type RecipeListResponse = {
@@ -35,8 +34,10 @@ export function RecipeListClient({
   });
   if (isLoading && !data) {
     return (
-      <div className="h-[400px] flex justify-center items-center">
-        <Loading />
+      <div className="grid grid-cols-1 gap-x-8 gap-y-9 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <RecipeCardSkeleton key={i} />
+        ))}
       </div>
     );
   }
