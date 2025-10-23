@@ -39,22 +39,22 @@ jobs:
           npm run build
           echo "✅ Build completed successfully"
 
-    - name: Check if build succeeded
-      run: |
-        echo "🔍 Checking build results..."
-        if [ -d ".next" ]; then
-          echo "✅ Build successful - .next directory exists"
-          echo "📁 Contents of .next directory:"
-          ls -la .next/
-          echo "📊 Directory size:"
-          du -sh .next/
-        else
-          echo "❌ Build failed - .next directory not found"
-          echo "🔍 Checking current directory contents:"
-          ls -la
-          echo "🔍 Checking for any build errors in logs..."
-          exit 1
-        fi
+      - name: Check if build succeeded
+        run: |
+          echo "🔍 Checking build results..."
+          if [ -d ".next" ]; then
+            echo "✅ Build successful - .next directory exists"
+            echo "📁 Contents of .next directory:"
+            ls -la .next/
+            echo "📊 Directory size:"
+            du -sh .next/
+          else
+            echo "❌ Build failed - .next directory not found"
+            echo "🔍 Checking current directory contents:"
+            ls -la
+            echo "🔍 Checking for any build errors in logs..."
+            exit 1
+          fi
 
       - name: Upload build artifacts
         if: success()
