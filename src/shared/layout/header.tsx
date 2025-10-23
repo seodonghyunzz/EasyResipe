@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import MyLogo from "@/public/logo/myrecipebook.svg";
 
 export function Header() {
   return (
@@ -10,7 +9,12 @@ export function Header() {
           <div className="container flex items-center justify-between h-full">
             <div className="flex items-center h-full gap-11 justify-center max-sm:mx-auto">
               <Link href="/">
-                <Image src={MyLogo} alt="로고" width={182} height={60} />
+                <Image
+                  src="/logo/myrecipebook.svg"
+                  alt="로고"
+                  width={182}
+                  height={60}
+                />
               </Link>
             </div>
           </div>
