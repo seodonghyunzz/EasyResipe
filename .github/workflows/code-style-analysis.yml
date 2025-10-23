@@ -1,0 +1,111 @@
+name: Code Style Analysis
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run ESLint with detailed output
+      run: |
+        echo "# 🔍 ESLint Analysis Report" > lint-report.md
+        echo "" >> lint-report.md
+        npm run lint 2>&1 | tee lint-output.txt
+        
+        if [ $? -eq 0 ]; then
+          echo "✅ **No linting errors found!**" >> lint-report.md
+        else
+          echo "❌ **Linting errors found:**" >> lint-report.md
+          echo '```' >> lint-report.md
+          cat lint-output.txt >> lint-report.md
+          echo '```' >> lint-report.md
+        fi
+        
+    - name: Count files and lines
+      run: |
+        echo "" >> lint-report.md
+        echo "## 📊 Code Statistics" >> lint-report.md
+        echo "" >> lint-report.md
+        
+        # Count different file types
+        JS_FILES=$(find src -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" | wc -l)
+        CSS_FILES=$(find src -name "*.css" | wc -l)
+        STORY_FILES=$(find src -name "*.stories.*" | wc -l)
+        
+        echo "- **JavaScript/TypeScript files:** $JS_FILES" >> lint-report.md
+        echo "- **CSS files:** $CSS_FILES" >> lint-report.md
+        echo "- **Storybook files:** $STORY_FILES" >> lint-report.md
+        
+        # Count lines of code
+        TOTAL_LINES=$(find src -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" | xargs wc -l | tail -1 | awk '{print $1}')
+        echo "- **Total lines of code:** $TOTAL_LINES" >> lint-report.md
+        
+    - name: Generate complexity report
+      run: |
+        echo "" >> lint-report.md
+        echo "## 🧩 Code Complexity Analysis" >> lint-report.md
+        echo "" >> lint-report.md
+        
+        # Find large files
+        echo "### 📏 Largest Files" >> lint-report.md
+        find src -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" | xargs wc -l | sort -nr | head -5 >> lint-report.md
+        
+        echo "" >> lint-report.md
+        echo "### 🔍 Most Complex Components" >> lint-report.md
+        echo "Files with most lines (potential refactoring candidates):" >> lint-report.md
+        find src -name "*.tsx" | xargs wc -l | sort -nr | head -3 >> lint-report.md
+        
+    - name: Check for TODO comments
+      run: |
+        echo "" >> lint-report.md
+        echo "## 📝 TODO Comments" >> lint-report.md
+        echo "" >> lint-report.md
+        
+        TODO_COUNT=$(grep -r "TODO\|FIXME\|HACK" src --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" | wc -l)
+        
+        if [ $TODO_COUNT -gt 0 ]; then
+          echo "Found $TODO_COUNT TODO/FIXME/HACK comments:" >> lint-report.md
+          echo '```' >> lint-report.md
+          grep -r "TODO\|FIXME\|HACK" src --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" >> lint-report.md
+          echo '```' >> lint-report.md
+        else
+          echo "✅ No TODO/FIXME/HACK comments found!" >> lint-report.md
+        fi
+        
+    - name: Upload analysis report
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-analysis-report
+        path: lint-report.md
+        
+    - name: Comment PR with analysis
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync('lint-report.md', 'utf8');
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: report
+          });
