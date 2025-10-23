@@ -2,57 +2,64 @@ name: CI
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
 
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [20.x]
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run ESLint
-      run: npm run lint
-      
-    - name: Run TypeScript check
-      run: npx tsc --noEmit
-      
-    - name: Build application
-      run: |
-        echo "🔨 Starting build process..."
-        npm run build
-        echo "✅ Build completed successfully"
-      
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Build application
+        run: |
+          echo "🔨 Starting build process..."
+          npm run build
+          echo "✅ Build completed successfully"
+
     - name: Check if build succeeded
       run: |
+        echo "🔍 Checking build results..."
         if [ -d ".next" ]; then
           echo "✅ Build successful - .next directory exists"
+          echo "📁 Contents of .next directory:"
           ls -la .next/
+          echo "📊 Directory size:"
+          du -sh .next/
         else
           echo "❌ Build failed - .next directory not found"
+          echo "🔍 Checking current directory contents:"
+          ls -la
+          echo "🔍 Checking for any build errors in logs..."
           exit 1
         fi
-      
-    - name: Upload build artifacts
-      if: success()
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-files
-        path: .next/
-        retention-days: 1
+
+      - name: Upload build artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-files
+          path: .next/
+          retention-days: 1
