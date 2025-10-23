@@ -34,9 +34,23 @@ jobs:
       run: npx tsc --noEmit
       
     - name: Build application
-      run: npm run build
+      run: |
+        echo "🔨 Starting build process..."
+        npm run build
+        echo "✅ Build completed successfully"
+      
+    - name: Check if build succeeded
+      run: |
+        if [ -d ".next" ]; then
+          echo "✅ Build successful - .next directory exists"
+          ls -la .next/
+        else
+          echo "❌ Build failed - .next directory not found"
+          exit 1
+        fi
       
     - name: Upload build artifacts
+      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: build-files
